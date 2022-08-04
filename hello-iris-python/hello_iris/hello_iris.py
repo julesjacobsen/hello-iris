@@ -29,10 +29,10 @@ print(clr)
 """Convert model to onnx"""
 initial_type = [('float_input', FloatTensorType([None, X_train.shape[1]]))]
 onnx_model = skl2onnx.to_onnx(clr, initial_type)
-onnxmltools.save_model(onnx_model, "../target/models/rf-iris.onnx")
+onnxmltools.save_model(onnx_model, "../../models/rf-iris.onnx")
 
 """Compute the prediction with ONNX Runtime"""
-sess = rt.InferenceSession("../target/models/rf-iris.onnx")
+sess = rt.InferenceSession("../../models/rf-iris.onnx")
 input_name = sess.get_inputs()[0].name
 label_name = sess.get_outputs()[0].name
 X = array([[5.1, 3.5, 1.4, 0.2], [5.9, 3.0, 4.2, 1.5], [5.9, 3., 5.1, 1.8]])
@@ -45,10 +45,10 @@ clr = LogisticRegression(max_iter=200)
 clr.fit(X_train, y_train)
 initial_type = [('float_input', FloatTensorType([None, X_train.shape[1]]))]
 onx = convert_sklearn(clr, initial_types=initial_type, target_opset=12)
-with open("../target/models/logreg-iris.onnx", "wb") as f:
+with open("../../models/logreg-iris.onnx", "wb") as f:
     f.write(onx.SerializeToString())
 
-sess = rt.InferenceSession("../target/models/logreg-iris.onnx")
+sess = rt.InferenceSession("../../models/logreg-iris.onnx")
 input_name = sess.get_inputs()[0].name
 label_name = sess.get_outputs()[0].name
 pred_onx = sess.run([label_name], {input_name: X_test.astype(numpy.float32)})[0]
