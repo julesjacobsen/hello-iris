@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "hello-iris"
+version = "0.1.0"
+description = ""
+authors = ["Jules Jacobsen <j.jacobsen@qmul.ac.uk>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pyqt5 = "5.15.7"
+matplotlib = "3.5.2"
+pandas = "1.4.3"
+seaborn = "0.11.2"
+scikit-learn = "1.1.1"
+jupyter = "^1.0.0"
+# export model to onnx format
+onnxmltools = "1.11.1"
+onnxruntime = "1.12.0"
+protobuf = "3.20.1"
+
+[tool.poetry.dev-dependencies]
+
+[tool.poetry.scripts]
+hello = "hello_iris:hello"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
